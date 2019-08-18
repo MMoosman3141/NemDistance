@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-beta</Version>
+    <Authors>Mark Moosman</Authors>
+    <Company />
+    <Description>A library for performing edit distance calculation between strings.</Description>
+    <PackageIconUrl>https://github.com/MMoosman3141/NemMvvm/blob/master/NemMvvm/NemAnkh.ico?raw=true</PackageIconUrl>
+    <PackageTags>Levenshtein Hamming Demerau Edit Distance</PackageTags>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Copyright>Copyright © 2019 Mark Moosman</Copyright>
+  </PropertyGroup>
+
+</Project>
