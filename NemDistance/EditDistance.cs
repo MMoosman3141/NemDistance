@@ -18,6 +18,16 @@ namespace NemDistance {
     /// <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
     /// <returns>The minimum edit distance of the 2 strings using the specified algorithm</returns>
     public static int MinEditDistance(string text1, string text2, Algorithms algorithm = Algorithms.Levenshtein) {
+      if(text1 == null) {
+        text1 = "";
+      }
+      if(text2 == null) {
+        text2 = "";
+      }
+
+      text1 = text1.Trim();
+      text2 = text2.Trim();
+
       switch(algorithm) {
         case Algorithms.None:
           return StringDistance(text1.ToStrings(), text2.ToStrings());
@@ -213,13 +223,17 @@ namespace NemDistance {
     /// <param name="substituteWeight">The weight to apply to substitutions</param>
     /// <returns>The Levenshtein distance of 2 lists of strings</returns>
     public static int LevenshteinDistance(IEnumerable<string> text1, IEnumerable<string> text2, int addDeleteWeight, int substituteWeight) {
-      if ((text1?.Count() ?? 0) == 0) {
-        return text2?.Count() ?? 0;
-      } else if ((text2?.Count() ?? 0) == 0) {
-        return text1?.Count() ?? 0;
+      if((text1?.Count() ?? 0) == 0) {
+        if((text2?.Count() ?? 0) == 0) {
+          return 0;
+        }
+        return text2.Count();
+      }
+      if ((text2?.Count() ?? 0) == 0) {
+        return text1.Count();
       }
 
-      if (text1.Count() > text2.Count()) {
+      if(text1.Count() > text2.Count()) {
         IEnumerable<string> temp = text2;
         text2 = text1;
         text1 = temp;
@@ -227,25 +241,27 @@ namespace NemDistance {
 
       int len1 = text1.Count();
       int len2 = text2.Count();
+      int[,] distArray = new int[2, len2 + 1];
 
-      int[,] distArray = new int[2, len1 + 1];
-      for (int j = 1; j < len1; j++) {
+      for (int j = 1; j <= len2; j++) {
         distArray[0, j] = j;
       }
 
-      int currRow = 0;
-      for (int i = 1; i < len2; i++) {
-        currRow = i & 1;
-        int prevRow = currRow ^ 1;
-        distArray[currRow, 0] = i;
-
-        for (int j = 1; j < len1; j++) {
-          int cost = text2.ElementAt(j - 1) == text1.ElementAt(i - 1) ? 0 : substituteWeight;
-          distArray[currRow, j] = Math.Min(Math.Min(distArray[prevRow, j] + addDeleteWeight, distArray[currRow, j - 1] + addDeleteWeight), distArray[prevRow, j - 1] + cost);
+      int currentRow = 0;
+      for(int i = 1; i <= len1; ++i) {
+        currentRow = i & 1;
+        distArray[currentRow, 0] = i;
+        int previousRow = currentRow ^ 1;
+        for(int j = 1; j <= len2; j++) {
+          int cost = (text2.ElementAt(j - 1) == text1.ElementAt(i - 1) ? 0 : substituteWeight);
+          distArray[currentRow, j] = Math.Min(Math.Min(
+            distArray[previousRow, j] + addDeleteWeight,
+            distArray[currentRow, j - 1] + addDeleteWeight),
+            distArray[previousRow, j - 1] + cost);
         }
       }
 
-      return distArray[currRow, len2];
+      return distArray[currentRow, len2];
     }
 
     /// <summary>
@@ -312,35 +328,31 @@ namespace NemDistance {
       int len1 = text1.Count();
       int len2 = text2.Count();
 
-      int[,] distArray = new int[len1, len2];
+      int[,] distArray = new int[len1 + 1, len2 + 1];
 
-      for (int i = 0; i < len1; i++) {
+      for(int i = 0; i <= len1; i++) {
         distArray[i, 0] = i;
       }
-      for (int j = 0; j < len2; j++) {
+      for(int j = 0; j <= len2; j++) {
         distArray[0, j] = j;
       }
 
-      for (int i = 1; i < len1; i++) {
-        for (int j = 1; j < len2; i++) {
-          int cost = text1.ElementAt(i - 1) == text2.ElementAt(i - 1) ? 0 : substituteTransposeWeight;
-          int add = distArray[i, j - 1] + addDeleteWeight;
-          int del = distArray[i - 1, j] + addDeleteWeight;
-          int sub = distArray[i - 1, j - 1] + cost;
+      for(int i = 1; i <= len1; i++) {
+        for(int j = 1; j <= len2; j++) {
+          int cost = text1.ElementAt(i - 1) == text2.ElementAt(j - 1) ? 0 : substituteTransposeWeight;
+          int delCost = distArray[i - 1, j] + addDeleteWeight; //deletion
+          int addCost = distArray[i, j - 1] + addDeleteWeight; //insertion
+          int subCost = distArray[i - 1, j - 1] + cost; //substitution cost if any
 
-          int dist = Math.Min(Math.Min(add, del), sub);
+          distArray[i, j] = Math.Min(Math.Min(delCost, addCost), subCost);
 
-          if (i > 1 && j > 1 && text1.ElementAt(i - 1) == text2.ElementAt(j - 2) && text1.ElementAt(i - 2) == text2.ElementAt(j - 1)) {
-            dist = Math.Min(dist, distArray[i - 2, j - 2] + cost);
+          if(i > 1 && j > 1 && text1.ElementAt(i - 1) == text2.ElementAt(j - 2) && text1.ElementAt(i - 2) == text2.ElementAt(j - 1)) {
+            distArray[i, j] = Math.Min(distArray[i, j], distArray[i - 2, j - 2] + cost);
           }
-
-          distArray[i, j] = dist;
         }
       }
 
-      return distArray[len1 - 1, len2 - 1];
-
-
+      return distArray[len1, len2];
     }
 
 
