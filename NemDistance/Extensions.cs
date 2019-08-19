@@ -5,6 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace NemDistance {
+  /// <summary>
+  /// Provides a number of methods extending string
+  /// </summary>
   public static class Extensions {
     /// <summary>
     /// Converts a string to an IEnumerable of strings containing the individual characters

@@ -316,7 +316,7 @@ namespace NemDistance {
     /// <param name="text1">The first of 2 lists of strings to compare</param>
     /// <param name="text2">The second of 2 lists of strings to compare</param>
     /// <param name="addDeleteWeight">The weight to apply to additions and deletions</param>
-    /// <param name="substituteTransposeWeight">The weight to apply to substitutions and transpositions/param>
+    /// <param name="substituteTransposeWeight">The weight to apply to substitutions and transpositions</param>
     /// <returns>The Demerau-Levenshtein distance of 2 lists of strings</returns>
     public static int DemerauLevenshteinDistance(IEnumerable<string> text1, IEnumerable<string> text2, int addDeleteWeight, int substituteTransposeWeight) {
       if ((text1?.Count() ?? 0) == 0) {

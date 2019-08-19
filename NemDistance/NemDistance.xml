@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NemDistance</name>
+    </assembly>
+    <members>
+        <member name="T:NemDistance.Algorithms">
+            <summary>
+            These are the allowable algorithms to be used when calculating the edit distance.
+            </summary>
+        </member>
+        <member name="F:NemDistance.Algorithms.None">
+            <summary>
+            No edit distance algorithm is used.  Distance is based on string length.
+            </summary>
+        </member>
+        <member name="F:NemDistance.Algorithms.Levenshtein">
+            <summary>
+            In the Levenshtein distance, uses simple addition, substitution, and deletion between strings.
+            </summary>
+        </member>
+        <member name="F:NemDistance.Algorithms.Hamming">
+            <summary>
+            The Hamming distance compares only string of equal length.
+            </summary>
+        </member>
+        <member name="F:NemDistance.Algorithms.DemerauLevenshtein">
+            <summary>
+            The Demerau-Levenshtein distance includes transpositions in it's opterations
+            </summary>
+        </member>
+        <member name="T:NemDistance.EditDistance">
+            <summary>
+            A static class with methods to find an edit distance using various algorithms.
+            </summary>
+        </member>
+        <member name="M:NemDistance.EditDistance.MinEditDistance(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the Minimum Edit distance using the algorithm specified.
+            Comparison is performed on a character level
+            </summary>
+            <param name="text1">The first of 2 strings to compare to each other</param>
+            <param name="text2">The second of 2 strings to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The minimum edit distance of the 2 strings using the specified algorithm</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.SimilarityPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the 2 strings are similar to each other
+            The comparison is performed on a character level
+            </summary>
+            <param name="text1">The first of 2 strings to compare to each other</param>
+            <param name="text2">The second of 2 strings to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The percentage that the 2 strings are similar to each other</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.ErrorPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the actual text is different from the expected text
+            The comparison is performed on a character level
+            </summary>
+            <param name="expectedText">The expected text</param>
+            <param name="actualText">The actual text</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The percentage that the actual text is different from the expected text</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.AccuracyPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the actual text is different from the expected text
+            The comparison is performed on a character level
+            </summary>
+            <param name="expectedText">The expected text</param>
+            <param name="actualText">The actual text</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The percentage that the actual text is different from the expected text</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseEditDistance(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the Minimum Edit distance using the algorithm specified.
+            Comparison is performed on a word level by first tokenizing the string values using the Tokenize extension method
+            </summary>
+            <param name="text1">The first of 2 strings to compare to each other</param>
+            <param name="text2">The second of 2 strings to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The minimum edit distance of the 2 strings using the specified algorithm</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseEditDistance(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},NemDistance.Algorithms)">
+            <summary>
+            Gets the Minimum Edit distance using the algorithm specified.
+            Comparison is performed on a string level, treating each string in the IEnumerables seperately
+            This method allow gettings the edit distance using your own tokenizer
+            </summary>
+            <param name="tokens1">The first of 2 IEnumerable&lt;string&gt; to compare to each other</param>
+            <param name="tokens2">The second of 2 IEnumerable&lt;string&gt; to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The minimum edit distance of the 2 values using the specified algorithm</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseSimilarityPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the 2 phrases are similar to each other
+            Comparison is performed on a word level by first tokenizing the string values using the Tokenize extension method
+            </summary>
+            <param name="text1">The first of 2 strings to compare to each other</param>
+            <param name="text2">The second of 2 strings to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The percentage that the 2 strings are similar to each other</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseSimilarityPercentage(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the 2 sets of strings are similar to each other
+            Comparison is performed on a string level allowing you to perform your own tokenization
+            </summary>
+            <param name="tokens1">The first of 2 IEnumerable&lt;string&gt; values to compare to each other</param>
+            <param name="tokens2">The second of 2 IEnumerable&lt;string&gt; values to compare to each other</param>
+            <param name="algorithm">The type of algorithm to use to calculate the edit distance</param>
+            <returns>The percentage that the 2 values are similar to each other</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseErrorPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage of difference that the actual text is from the expected text
+            Comparison is performed on a word level by first tokenizing the string values
+            </summary>
+            <param name="expectedText">The expected text</param>
+            <param name="actualText">The actual text</param>
+            <param name="algorithm">The type of algorithm to use when calculating the edit distance</param>
+            <returns>The percentage that the actual text is different from the expected text</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseErrorPercentage(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage of difference that the actual tokens are from the expected tokens
+            Comparison is performed on a string level allowing custom tokenization
+            </summary>
+            <param name="expectedTokens">The expected tokens</param>
+            <param name="actualTokens">The actual tokens</param>
+            <param name="algorithm">The type of algorithm to use when calculating the edit distance</param>
+            <returns>The percentage that the actual tokens are different from the expected tokens</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseAccuracyPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage of sameness that the actual text is from the expected text
+            Comparison is performed on a word level by first tokenizing the string values
+            </summary>
+            <param name="expectedText">The expected text</param>
+            <param name="actualText">The actual text</param>
+            <param name="algorithm">The type of algorithm to use when calculating the edit distance</param>
+            <returns>The percentage that the actual text is the same as the expected text</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.PhraseAccuracyPercentage(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage of sameness that the actual tokens are from the expected tokens
+            Comparison is performed on a string level allowing custom tokenization
+            </summary>
+            <param name="expectedTokens">The expected tokens</param>
+            <param name="actualTokens">The actual tokens</param>
+            <param name="algorithm">The type of algorithm to use when calculating the edit distance</param>
+            <returns>The percentage that the actual tokens are the same as the expected tokens</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.LevenshteinDistance(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Calculates the Levenshtein distance of 2 strings
+            </summary>
+            <param name="text1">The first of 2 strings to compare</param>
+            <param name="text2">The second of 2 strings to compare</param>
+            <param name="addDeleteWeight">The weight to apply to additions and deletions</param>
+            <param name="substituteWeight">The weight to apply to substitutions</param>
+            <returns>The Levenshtein distance of 2 strings</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.LevenshteinDistance(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Int32)">
+            <summary>
+            Calculates the Levenshtein distance of 2 lists of strings
+            </summary>
+            <param name="text1">The first of 2 lists of strings to compare</param>
+            <param name="text2">The second of 2 lists of strings to compare</param>
+            <param name="addDeleteWeight">The weight to apply to additions and deletions</param>
+            <param name="substituteWeight">The weight to apply to substitutions</param>
+            <returns>The Levenshtein distance of 2 lists of strings</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.ModHammingDistance(System.String,System.String,System.Int32)">
+            <summary>
+            Calculates a modified Hamming distance of 2 strings
+            The modification allows comparison of strings that are not of equal length, by treating all extra characters as additions
+            </summary>
+            <param name="text1">The first of 2 strings to compare</param>
+            <param name="text2">The second of 2 strings to compare</param>
+            <param name="substituteWeight">The weight to apply to substitutions</param>
+            <returns>The modified Hamming distance of 2 strings</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.ModHammingDistance(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            Calculates a modified Hamming distance of 2 lists of strings
+            The modification allows comparison of lists that are not of equal length, by treating all extra strings as additions
+            </summary>
+            <param name="text1">The first of 2 lists of strings to compare</param>
+            <param name="text2">The second of 2 lists of strings to compare</param>
+            <param name="substituteWeight">The weight to apply to substitutions</param>
+            <returns>The modified Hamming distance of 2 lists of strings</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.DemerauLevenshteinDistance(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Calculates the Demerau-Levenshtein distance of 2 strings
+            </summary>
+            <param name="text1">The first of 2 strings to compare</param>
+            <param name="text2">The second of 2 strings to compare</param>
+            <param name="addDeleteWeight">The weight to apply to additions and deletions</param>
+            <param name="substituteTransposeWeight">The weight to apply to substitutions and transpositions</param>
+            <returns>The Demerau-Levenshtein distance of 2 strings</returns>
+        </member>
+        <member name="M:NemDistance.EditDistance.DemerauLevenshteinDistance(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Int32,System.Int32)">
+            <summary>
+            Calculates the Demerau-Levenshtein distance of 2 lists of strings
+            </summary>
+            <param name="text1">The first of 2 lists of strings to compare</param>
+            <param name="text2">The second of 2 lists of strings to compare</param>
+            <param name="addDeleteWeight">The weight to apply to additions and deletions</param>
+            <param name="substituteTransposeWeight">The weight to apply to substitutions and transpositions</param>
+            <returns>The Demerau-Levenshtein distance of 2 lists of strings</returns>
+        </member>
+        <member name="T:NemDistance.Extensions">
+            <summary>
+            Provides a number of methods extending string
+            </summary>
+        </member>
+        <member name="M:NemDistance.Extensions.ToStrings(System.String)">
+            <summary>
+            Converts a string to an IEnumerable of strings containing the individual characters
+            </summary>
+            <param name="source">The string to split</param>
+            <returns>An IEnumerable of the strings for each character</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.Tokenize(System.String)">
+            <summary>
+            Tokenizes a phrase into separate words, and punctuation
+            For word internal punctuation of apostrophes, hyphens, and underscores the characters will be maintained
+            as part of the word if word characters appear on both sides of the punctuation
+            </summary>
+            <param name="text">The text to tokenize</param>
+            <returns>An IEnumerable of string representing the tokenized text</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.MinEditDistance(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the Minimum edit distance of comparing the source to another string using the specified algorithm
+            </summary>
+            <param name="source">The source text to use in the comparison</param>
+            <param name="text">The other text to use in the comparison</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein</param>
+            <returns>The minimum edit distance using the specified algorithm</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.SimilarityPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the text is similar to this text
+            </summary>
+            <param name="source">This text</param>
+            <param name="text">The text to use as a comparison</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage of similarity</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.ErrorPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the text is different from this text
+            </summary>
+            <param name="expected">This text</param>
+            <param name="actual">The text being compared for differences</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage difference</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.AccuracyPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the percentage that the text is the same as this text
+            </summary>
+            <param name="expected">This text</param>
+            <param name="actual">The text being compared as the same</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage of sameness</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.PhraseMinEditDistance(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the minimum edit distance of the text compared to this text.
+            Tokenizes the strings and compares using word level comparisons
+            </summary>
+            <param name="source">This text</param>
+            <param name="text">The text to compare to</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The minimum edit distance between the two phrases</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.PhraseSimilarityPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the amount of similarity between the text and this text.  This is the inverse of the PercentageError
+            Tokenizes the strings and compares using word level comparisons
+            </summary>
+            <param name="source">This text</param>
+            <param name="text">The text to compare to</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage of similarity</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.PhraseErrorPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the amount that the text is different from this text
+            Tokenizes the strings and compares using word level comparisons
+            </summary>
+            <param name="expected">This text</param>
+            <param name="actual">The text to compare to</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage that the text is different from expected</returns>
+        </member>
+        <member name="M:NemDistance.Extensions.PhraseAccuracyPercentage(System.String,System.String,NemDistance.Algorithms)">
+            <summary>
+            Gets the amounts that the text is the same from this text.  This is the inverse of the PercentageError.
+            Tokenizes the strings and compares using word level comparisons
+            </summary>
+            <param name="expected">This text</param>
+            <param name="actual">The text to compare to</param>
+            <param name="algorithm">The edit distance algorithm to use.  Defaults to Levenshtein.</param>
+            <returns>The percentage that the text is the same as expected.</returns>
+        </member>
+    </members>
+</doc>
