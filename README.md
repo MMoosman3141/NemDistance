@@ -26,7 +26,7 @@ Each method has two versions:
 
 The methods are:
 * PhraseEditDistance
-  * This methods provides a basic Edit Distance using of of 4 algorithms.
+  * This methods provides a basic Edit Distance using one of 4 algorithms.
 * PhraseSimilarityPercentage
   * This method provides a percentage of similarity between two phrases.
 * PhraseErrorPercentage
