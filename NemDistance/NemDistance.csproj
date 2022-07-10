@@ -1,27 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>2.0.0</Version>
     <Authors>Mark Moosman</Authors>
     <Company />
     <Description>A library for performing edit distance calculation between strings.</Description>
     <PackageIconUrl>https://github.com/MMoosman3141/NemMvvm/blob/master/NemMvvm/NemAnkh.ico?raw=true</PackageIconUrl>
     <PackageTags>Levenshtein Hamming Demerau Edit Distance</PackageTags>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Copyright>Copyright © 2019 Mark Moosman</Copyright>
+    <Copyright>Copyright © 2019 ${Authors}</Copyright>
     <PackageProjectUrl>https://github.com/MMoosman3141/NemDistance</PackageProjectUrl>
+    <PackageReleaseNotes>Version 2.0.0 updates the framework version to .NET 6</PackageReleaseNotes>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <PackageIcon>NemAnkh.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/MMoosman3141/NemDistance</RepositoryUrl>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <ItemGroup>
+    <None Include="..\..\..\Pictures\NemAnkh.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\markm\OneDrive\Code\NemDistance\NemDistance\NemDistance.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\markm\OneDrive\Code\NemDistance\NemDistance\NemDistance.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
 </Project>
